@@ -1,11 +1,17 @@
 /*
 Title: Unicorn Escape
-Author: Rowan Rathod
+Author: Rowan Asami De Almeida
 
 This game was made for the 2018 CGRA151 Project at VUW.
 This software is free for all non-comercial and educational use.
 
-Copyright Rowan Rathod 2018
+This is the main entry point for the game. 
+This source code requires the following dependent Class files to be in the same root source directory as this file:
+  * Elements.pde
+  * Liquide.pde
+  * Unicorn.pde
+
+Copyright Rowan Asami Rhysand De Almeida 2018
 All Rights Reserved
 */
 
@@ -39,7 +45,7 @@ int level;
 color backgroundColour;
 
 /* The Set Up Loop */
-void setup(){
+void setup() {
   
   startPerm = false;
   contactFound = false;
@@ -60,7 +66,7 @@ void setup(){
   size(600, 800);
   s = new UnicornSprite(0,0);
   acid = new Liquid();
-  for(int i=0; i<9; i++){
+  for(int i=0; i<9; i++) {
     list.add(new Block(random(0,width-200), 60+(100*i)));
   }
   list.add(new Block(10,500));  // Starting Platform
@@ -69,26 +75,26 @@ void setup(){
 }
 
 /* The Main Draw Loop */
-void draw(){
+void draw() {
   println(pause);
-  if(!startPerm){
-    if(instructPerm){
+  if(!startPerm) {
+    if(instructPerm) {
       instructions(); 
-    }else{
+    } else {
       startMenu(); 
     }
-  }else if(gameOver){
+  } else if(gameOver) {
     gameOverScreen();
   }
-  else if(pause){
+  else if(pause) {
     pauseMenu();
-  }else{
+  } else {
     background(backgroundColour);
     //onePlatform();
     drawPlatforms();
     s.draw();  // Redraws the sprite
     acid.increase();
-    if(s.jumping){
+    if(s.jumping) {
       acid.decrease();
     }
     acid.draw();
@@ -105,22 +111,22 @@ void draw(){
 
 
 // Draws a repeated set of Platforms
-void drawPlatforms(){
+void drawPlatforms() {
   contactFound = false;
-  for(int i=0; i<list.size(); i++){
+  for(int i=0; i<list.size(); i++) {
     list.get(i).draw();
-    if(s.isOn(list.get(i))){
+    if(s.isOn(list.get(i))) {
       s.blockCompare = list.get(i);
       contactFound = true;
-    }else if(s.y+s.totHeight+s.offsetY >= height){
+    } else if(s.y+s.totHeight+s.offsetY >= height) {
       contactFound = true; 
     }
     // Draws a new platform for every platform that goes past the bottom of the screen
-    if(list.get(i).y1 > height){
+    if(list.get(i).y1 > height) {
       list.set(i, new Block(random(0,width-a.sizeX), -20-(random(30,65))));
       list.get(i).sizeX = a.sizeX;
-      for(int j=0; j<list.size(); j++){
-        while(i != j && (list.get(j).isOn(list.get(i)))){
+      for(int j=0; j<list.size(); j++) {
+        while(i != j && (list.get(j).isOn(list.get(i)))) {
           list.set(i, new Block(random(0,width-a.sizeX), -20-(random(40,60))));
           list.get(i).sizeX = a.sizeX;
           //j = 0;
@@ -129,40 +135,44 @@ void drawPlatforms(){
       }
     }
    }
-   if(!contactFound){
+   if(!contactFound) {
     s.sitting = false;
   }
   
 }
 
-void keyPressed(){
-   // Keyboard Controls
-  if((keyCode == UP || key == 'w') && (keyCode == CONTROL) && (keyCode == ALT)){
+// Keyboard Controls
+void keyPressed() {
+  if((keyCode == UP || key == 'w') && (keyCode == CONTROL) && (keyCode == ALT)) {
     s.up();
   }
-  if((keyCode == DOWN || key == 's') && (keyCode == CONTROL) && (keyCode == ALT)){
+  
+  if((keyCode == DOWN || key == 's') && (keyCode == CONTROL) && (keyCode == ALT)) {
     s.down();
   }
-  if((keyCode == RIGHT || key == 'd')){
+
+  if((keyCode == RIGHT || key == 'd')) {
     s.right();
   }
-  if((keyCode == LEFT || key == 'a')){
+
+  if((keyCode == LEFT || key == 'a')) {
     s.left();
   }
-  if(keyCode == ' ' || keyCode == UP || key == 'w'){
+
+  if(keyCode == ' ' || keyCode == UP || key == 'w') {
     s.jump();
   }
-  if(key == 'p' || keyCode == 'p'){
-    if(!pause){
+
+  if(key == 'p' || keyCode == 'p') {
+    if(!pause) {
       pause = true; 
-    }else{
+    } else {
       pause = false; 
     }
   }
 }
 
-void startMenu(){
-  
+void startMenu() {
   // Background and Font Colours
   background(0);
   fill(255,255,255);
@@ -180,12 +190,12 @@ void startMenu(){
   float playSwidth = textWidth(playS);
   float playSheight = textAscent() - textDescent();
   if(((mouseX >= (width/2)-(playSwidth/2)) && (mouseX <= (width/2)+playSwidth))
-  && ((mouseY >= (height/2)-playSheight) && (mouseY <= (height/2)+playSheight))){
+  && ((mouseY >= (height/2)-playSheight) && (mouseY <= (height/2)+playSheight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       startPerm = true; 
     }
-  }else{
+  } else {
    fill(255);
   }
   text(playS, (width/2), (height/2)+playSheight);
@@ -196,13 +206,13 @@ void startMenu(){
   float instWid = textWidth(instButton);
   float instHei = textAscent() - textDescent();
   if(((mouseX >= (width/2)-instWid/2) && (mouseX <= (width/2)+instWid/2))
-  && ((mouseY >= (height/2)-playSheight+20+instHei) && (mouseY <= (height/2)+playSheight+20+instHei))){
+  && ((mouseY >= (height/2)-playSheight+20+instHei) && (mouseY <= (height/2)+playSheight+20+instHei))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       startPerm = false;
       instructPerm = true;
     }
-  }else{
+  } else {
    fill(255);
   }
   text(instButton, (width/2), (height/2)+playSheight+20+instHei);
@@ -212,12 +222,12 @@ void startMenu(){
   float closePwidth = textWidth(closeProgram);
   float closeHeight = textAscent() - textDescent();
   if(((mouseX >= (width/2)-closePwidth/2) && (mouseX <= (width/2)+closePwidth/2))
-  && ((mouseY >= (height/2)-playSheight+20+instHei+20+closeHeight) && (mouseY <= (height/2)+playSheight+20+instHei+20+closeHeight))){
+  && ((mouseY >= (height/2)-playSheight+20+instHei+20+closeHeight) && (mouseY <= (height/2)+playSheight+20+instHei+20+closeHeight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       exit();
     }
-  }else{
+  } else {
    fill(255);
   }
   text(closeProgram, width/2, (height/2)+playSheight+20+instHei+20+closeHeight);
@@ -225,7 +235,7 @@ void startMenu(){
 }
 
 // Instructions
-void instructions(){
+void instructions() {
   background(0);
   fill(255);
   
@@ -266,12 +276,12 @@ void instructions(){
   textFont(varelaR, 20);
   textAlign(LEFT);
   if(((mouseX >= 10) && (mouseX <= 10+backWidth))
-  && (((mouseY >= height-textDescent()-textAscent()-6)) && (mouseY <= height))){
+  && (((mouseY >= height-textDescent()-textAscent()-6)) && (mouseY <= height))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       instructPerm = false;
     }
-  }else{
+  } else {
    fill(255);
   }
   text(backButton, 10, height - (textAscent() - textDescent()));
@@ -279,7 +289,7 @@ void instructions(){
 }
 
 // Game Over Screen
-void gameOverScreen(){
+void gameOverScreen() {
   
   // Background and Font Colours
   background(0);
@@ -297,13 +307,13 @@ void gameOverScreen(){
   float playSwidth = textWidth(playS);
   float playSheight = textAscent() - textDescent();
   if(((mouseX >= (width/2)-(playSwidth/2)) && (mouseX <= (width/2)+(playSwidth/2)))
-  && ((mouseY >= (height/2)-playSheight) && (mouseY <= (height/2)+playSheight))){
+  && ((mouseY >= (height/2)-playSheight) && (mouseY <= (height/2)+playSheight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       reset();
       startPerm = true;
     }
-  }else{
+  } else {
    fill(255);
   }
   text(playS, (width/2), (height/2)+playSheight);
@@ -313,12 +323,12 @@ void gameOverScreen(){
   float closePwidth = textWidth(closeProgram);
   float closeHeight = textAscent() - textDescent();
   if(((mouseX >= (width/2)-closePwidth/2) && (mouseX <= (width/2)+closePwidth/2))
-  && ((mouseY >= (height/2)-playSheight+20+closeHeight) && (mouseY <= (height/2)+playSheight+20+closeHeight))){
+  && ((mouseY >= (height/2)-playSheight+20+closeHeight) && (mouseY <= (height/2)+playSheight+20+closeHeight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       exit();
     }
-  }else{
+  } else {
    fill(255);
   }
   text(closeProgram, width/2, (height/2)+playSheight+30+closeHeight);
@@ -326,26 +336,26 @@ void gameOverScreen(){
 }
 
 // When to increment current level
-void levelUp(){
-  if((finalScore % 100 == 0) && !leveled){
+void levelUp() {
+  if((finalScore % 100 == 0) && !leveled) {
     level = 1+(finalScore/100);
-    if(level != 1){
+    if(level != 1) {
       acid.updateRising(0.15);
-      if(a.sizeX > 175){
+      if(a.sizeX > 175) {
         a.sizeX -= 5;
       }
     }
     leveled = true;
-  }else{
+  } else {
     leveled = false;
   }
   
-  if(level == 2){
+  if(level == 2) {
     backgroundColour = color(87, 148, 186);
     s.bodyColor = color(31, 53, 137);
     acid.colour = color(141, 226, 118);
   }
-  if(level == 3){
+  if(level == 3) {
     backgroundColour = color(87, 148, 186);
     s.bodyColor = color(31, 53, 137);
   }
@@ -353,7 +363,7 @@ void levelUp(){
 }
 
 // Banner
-void banner(){
+void banner() {
   float bH = 30;  // Banner Height
   fill(50);
   rect(0,0,width,bH);
@@ -367,8 +377,7 @@ void banner(){
 }
 
 // Pause Menu
-void pauseMenu(){
-  
+void pauseMenu() {
   float pauseWidth = width*0.7;
   float pWidthDiff = width - pauseWidth;
   float pauseHeight = height*0.7;
@@ -388,12 +397,12 @@ void pauseMenu(){
   // Resume Game Button
   textFont(varelaR, 30);
   if(((mouseX >= (width/2)-textWidth(continueButton)/2) && (mouseX <= (width/2)+textWidth(continueButton)/2))
-  && ((mouseY >= (height/2)-(pauseHeight/10) + pTextHeight) && (mouseY <= (height/2)-(pauseHeight/10) - pTextHeight))){
+  && ((mouseY >= (height/2)-(pauseHeight/10) + pTextHeight) && (mouseY <= (height/2)-(pauseHeight/10) - pTextHeight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       pause = false;
     }
-  }else{
+  } else {
     fill(255);
   }
   text(continueButton, (width/2), (height/2)-(pauseHeight/10));
@@ -401,25 +410,25 @@ void pauseMenu(){
   // Exit to Main Menu Button
   textFont(varelaR, 30);
   if(((mouseX >= (width/2)-textWidth(mainMenuP)/2) && (mouseX <= (width/2)+textWidth(mainMenuP)/2))
-  && ((mouseY >= (height/2) + pTextHeight) && (mouseY <= (height/2) - pTextHeight))){
+  && ((mouseY >= (height/2) + pTextHeight) && (mouseY <= (height/2) - pTextHeight))) {
     fill(250,255,0);
-    if(mousePressed){
+    if(mousePressed) {
       startPerm = false;
       reset();
     }
-  }else{
+  } else {
     fill(255);
   }
   text(mainMenuP, (width/2), (height/2));
   
 }
 
-void reset(){
+void reset() {
   setup();
 }
 
 // Prints out some important details (For Development Purposes)
-void printDiagnostics(){
+void printDiagnostics() {
   println(" ");
   println("velY: " + s.velY);
   println("x: " + s.x);
@@ -430,13 +439,12 @@ void printDiagnostics(){
 }
 
 // Draws one platform (For debugging purposes)
-void onePlatform(){
-  if(s.isOn(b)){
+void onePlatform() {
+  if(s.isOn(b)) {
     s.blockCompare = b;
-  }else if(s.isOn(a)){
+  } else if(s.isOn(a)) {
     s.blockCompare = a; 
-  }
-  else{
+  } else {
     s.sitting = false;    
   }
   
@@ -446,18 +454,18 @@ void onePlatform(){
 }
 
 // Draws a static set of Platforms (For debugging purposes)
-void buildPlatforms(){
+void buildPlatforms() {
   contactFound = false;
-  for(int i=0; i<list.size(); i++){
+  for(int i=0; i<list.size(); i++) {
     list.get(i).draw();
     
-    if(s.isOn(list.get(i))){
+    if(s.isOn(list.get(i))) {
       s.blockCompare = list.get(i);
       contactFound = true;
     }   
   }
   
-  if(!contactFound){
+  if(!contactFound) {
     s.sitting = false;
   }
 }
