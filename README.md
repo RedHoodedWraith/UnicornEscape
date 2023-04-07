@@ -1,7 +1,7 @@
 # Unicorn Escape
 
 **Author:** Rowan Asami Rhysand De Almeida</br>
-**Date Authored:** Originally written in 2018
+**Date Authored:** Originally written in 2018</br>
 **Last Updated:** April 2023
 
 A game project I made in Processing back in 2018 for my CGRA151 course project. This game is inspired by Doodle Jump but with slightly different mechanics.</br>
