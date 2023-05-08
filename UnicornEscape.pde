@@ -1,11 +1,11 @@
 /*
 Title: Unicorn Escape
-Author: Rowan Rathod
+Author: Rowan De Almeida
 
 This game was made for the 2018 CGRA151 Project at VUW.
 This software is free for all non-comercial and educational use.
 
-Copyright Rowan Rathod 2018
+Copyright Rowan De Almeida 2018
 All Rights Reserved
 */
 
