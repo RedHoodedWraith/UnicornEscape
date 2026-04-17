@@ -1,6 +1,6 @@
 /*
 Title: Liquid Class for Unicorn Escape
-Author: Rowan Asami De Almeida
+Author: Asami De Almeida
 
 This game was made for the 2018 CGRA151 Project at VUW.
 This software is free for all non-comercial and educational use.
