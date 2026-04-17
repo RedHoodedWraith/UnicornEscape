@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2018 Rowan Asami Rhysand De Almeida
+Copyright (c) 2018 R. Asami R. De Almeida
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

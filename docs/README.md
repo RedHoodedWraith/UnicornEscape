@@ -1,6 +1,6 @@
 # Project Plan & Reflection
 
-**Author:** Rowan Asami Rhysand De Almeida</br>
+**Author:** Asami De Almeida</br>
 **Dates Written & Updated:** Originally written in 2018; updated in 2023
 
 Below are the supporting documentation I originally submitted at part of my project submission for CGRA151 in 2018. This document combines the Project Plan and the Report & Reflection documents. The Project Plan was written at the start of the project. Report & Reflection was written at the end of the project prior to its submission for CGRA151 for grading.
